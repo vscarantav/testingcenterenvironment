@@ -1,0 +1,50 @@
+{
+  "domains": [
+    "localhost",
+    "127.0.0.1"
+  ],
+  "server_url": "https://exam.university.edu",
+  "allowed_paths": [
+    "/api/auth",
+    "/api/exam",
+    "/api/session",
+    "/api/upload",
+    "/api/question-bank",
+    "/ws"
+  ],
+  "processes": {
+    "win32": [
+      "LockGuard.exe",
+      "explorer.exe",
+      "svchost.exe",
+      "csrss.exe",
+      "dwm.exe",
+      "conhost.exe",
+      "RuntimeBroker.exe",
+      "System",
+      "smss.exe",
+      "lsass.exe",
+      "services.exe",
+      "winlogon.exe",
+      "wininit.exe",
+      "fontdrvhost.exe",
+      "spoolsv.exe"
+    ],
+    "darwin": [
+      "LockGuard",
+      "Electron",
+      "WindowServer",
+      "launchd",
+      "kernel_task",
+      "loginwindow",
+      "Finder",
+      "Dock",
+      "SystemUIServer",
+      "coreaudiod",
+      "bluetoothd",
+      "distnoted",
+      "UserEventAgent",
+      "mds_stores"
+    ]
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "processes": {
+    "win32": {
+      "browsers": [
+        "chrome.exe", "msedge.exe", "firefox.exe", "brave.exe",
+        "opera.exe", "vivaldi.exe", "iexplore.exe", "safari.exe",
+        "chromium.exe", "waterfox.exe", "tor.exe", "midori.exe"
+      ],
+      "ai_tools": [
+        "Copilot.exe", "WindowsCopilotRuntime.exe"
+      ],
+      "remote_desktop": [
+        "TeamViewer.exe", "AnyDesk.exe", "mstsc.exe",
+        "chrome_remote_desktop.exe", "ScreenConnect.ClientService.exe",
+        "uvnc.exe", "tvnserver.exe", "vncviewer.exe",
+        "LogMeIn.exe", "GoToAssist.exe", "parsec.exe",
+        "rustdesk.exe"
+      ],
+      "screen_share": [
+        "obs64.exe", "obs32.exe", "OBS.exe",
+        "ShareX.exe", "Lightshot.exe", "Greenshot.exe",
+        "SnagitEditor.exe", "CamtasiaStudio.exe",
+        "streamlabs.exe", "XSplit.Core.exe"
+      ],
+      "chat_messaging": [
+        "Discord.exe", "Slack.exe", "Teams.exe", "ms-teams.exe",
+        "Telegram.exe", "WhatsApp.exe", "Signal.exe",
+        "Zoom.exe", "Skype.exe", "Viber.exe",
+        "element.exe", "wire.exe", "Messenger.exe"
+      ],
+      "virtual_machines": [
+        "VBoxTray.exe", "VBoxSVC.exe", "VirtualBox.exe", "VirtualBoxVM.exe",
+        "vmtoolsd.exe", "vmwaretray.exe", "vmware.exe", "vmplayer.exe",
+        "vmware-vmx.exe", "vmware-authd.exe",
+        "prl_tools.exe", "prl_client_app.exe",
+        "qemu-system-x86_64.exe", "qemu-system-i386.exe"
+      ],
+      "note_taking": [
+        "notepad.exe", "notepad++.exe", "wordpad.exe",
+        "WINWORD.EXE", "EXCEL.EXE", "POWERPNT.EXE",
+        "sublime_text.exe", "Code.exe"
+      ]
+    },
+    "darwin": {
+      "browsers": [
+        "Safari", "Google Chrome", "Google Chrome Helper",
+        "Microsoft Edge", "Firefox", "Brave Browser",
+        "Opera", "Vivaldi", "Arc", "Chromium",
+        "Tor Browser"
+      ],
+      "ai_tools": [],
+      "remote_desktop": [
+        "TeamViewer", "AnyDesk", "Chrome Remote Desktop Host",
+        "ScreenConnect", "RealVNC", "TigerVNC",
+        "parsec", "rustdesk"
+      ],
+      "screen_share": [
+        "OBS", "ScreenFlow", "Camtasia",
+        "Snagit", "CleanShot X", "Monosnap"
+      ],
+      "chat_messaging": [
+        "Discord", "Slack", "Microsoft Teams",
+        "Telegram", "WhatsApp", "Signal",
+        "zoom.us", "Skype", "Viber",
+        "Element", "Wire", "Messenger"
+      ],
+      "virtual_machines": [
+        "VBoxClient", "VBoxService", "VBoxHeadless",
+        "vmware-tools-daemon", "vmware-vmx",
+        "prl_tools", "prl_client_app",
+        "qemu-system-x86_64", "qemu-system-aarch64",
+        "UTM"
+      ],
+      "note_taking": [
+        "TextEdit", "Notes", "Microsoft Word",
+        "Microsoft Excel", "Microsoft PowerPoint",
+        "Sublime Text", "Visual Studio Code"
+      ]
+    }
+  },
+  "domains": [
+    "gemini.google.com", "bard.google.com", "aistudio.google.com",
+    "chatgpt.com", "chat.openai.com", "api.openai.com", "openai.com",
+    "claude.ai", "api.anthropic.com", "anthropic.com",
+    "copilot.microsoft.com", "bing.com/chat", "sydney.bing.com",
+    "perplexity.ai",
+    "you.com", "phind.com", "poe.com",
+    "huggingface.co", "replicate.com",
+    "character.ai", "pi.ai", "mistral.ai", "mistral.com",
+    "deepseek.com", "chat.deepseek.com",
+    "groq.com", "console.groq.com",
+    "together.ai", "api.together.xyz",
+    "cohere.ai", "dashboard.cohere.ai",
+    "writesonic.com", "jasper.ai", "copy.ai",
+    "quillbot.com", "grammarly.com",
+    "wolframalpha.com", "symbolab.com", "mathway.com", "photomath.com",
+    "chegg.com", "coursehero.com", "bartleby.com", "studocu.com",
+    "reddit.com", "stackoverflow.com", "stackexchange.com",
+    "pastebin.com", "hastebin.com", "gist.github.com"
+  ],
+  "keyboard_shortcuts": {
+    "win32": [
+      "Alt+Tab", "Alt+F4", "Win", "Win+D", "Win+E", "Win+R", "Win+L",
+      "Ctrl+Alt+Del", "Ctrl+Shift+Esc", "PrintScreen", "Alt+PrintScreen",
+      "Win+PrintScreen", "Ctrl+C", "Ctrl+V", "Ctrl+X", "Ctrl+A",
+      "Ctrl+Shift+I", "Ctrl+Shift+J", "F12", "F5", "Ctrl+R",
+      "Ctrl+P", "Ctrl+S", "Ctrl+N", "Ctrl+T", "Ctrl+W",
+      "Ctrl+Shift+N"
+    ],
+    "darwin": [
+      "Cmd+Tab", "Cmd+Q", "Cmd+H", "Cmd+M", "Cmd+W",
+      "Cmd+Space", "Ctrl+Up", "Ctrl+Down",
+      "Cmd+Shift+3", "Cmd+Shift+4", "Cmd+Shift+5",
+      "Cmd+C", "Cmd+V", "Cmd+X", "Cmd+A",
+      "Cmd+Option+I", "Cmd+Option+J", "Cmd+R",
+      "Cmd+P", "Cmd+S", "Cmd+N", "Cmd+T",
+      "Cmd+Shift+N"
+    ]
+  }
+}

@@ -1,0 +1,189 @@
+{
+  "project": {
+    "name": "Secure Testing Center Environment",
+    "version": "1.0.0",
+    "codename": "LockGuard",
+    "description": "A locked-down exam proctoring desktop application that students download and install on their own machines to take exams remotely. Built with Electron, it provides kiosk-mode lockdown, media capture, VM detection, and AI-blocking to ensure academic integrity.",
+    "organization": "University Testing Center",
+    "platforms": ["win32", "darwin"],
+    "license": "PROPRIETARY"
+  },
+
+  "objectives": [
+    "OBJ-1: Lock the student's workstation to the exam interface only during exam sessions",
+    "OBJ-2: Record camera, microphone, and screen throughout the exam for proctoring review",
+    "OBJ-3: Block all AI assistants (Gemini, ChatGPT, Copilot, Claude, Perplexity) and all web browsers",
+    "OBJ-4: Block unauthorized programs, processes, and software from running during the exam",
+    "OBJ-5: Resist hacking, bypass attempts, VM spoofing, remote desktop access, and tampering",
+    "OBJ-6: Detect and flag unauthorized voices, absent students, and suspicious gaze patterns",
+    "OBJ-7: Provide a secure question bank with quiz import/export capabilities",
+    "OBJ-8: Upload all recordings and audit logs to the university server",
+    "OBJ-9: Support both Windows and macOS with platform-specific lockdown implementations",
+    "OBJ-10: Provide a pre-exam verification sequence (environment scan, room scan, voice calibration, digital signature)"
+  ],
+
+  "behaviors": {
+    "_description": "Rules that every module and every developer/agent MUST follow when making changes to this codebase.",
+    "rules": [
+      "RULE-1: Security-first — every feature must be designed with the assumption that the student is actively trying to bypass it",
+      "RULE-2: Defense-in-depth — no single security check should be a single point of failure; always layer multiple checks",
+      "RULE-3: Platform abstraction — never call OS-specific commands directly from lockdown/media/security modules; always go through src/platform/",
+      "RULE-4: Context isolation — the renderer process must NEVER have direct access to Node.js APIs; all communication goes through the preload contextBridge",
+      "RULE-5: No network leaks — during an active exam session, the only allowed network destination is the exam server; everything else must be blocked at both the application and OS firewall level",
+      "RULE-6: Audit everything — every security-relevant event (blocked process, blocked shortcut, VM detection, voice mismatch, etc.) must be logged via src/security/auditLog.js",
+      "RULE-7: Fail-secure — if a security check fails or throws an error, the default behavior must be to BLOCK the action, not allow it",
+      "RULE-8: No silent failures — if camera/mic/screen recording fails, warn the student AND flag the proctor; never silently continue without recording",
+      "RULE-9: Encrypted at rest — all locally cached data (recordings, voiceprints, question banks) must be AES-256 encrypted",
+      "RULE-10: Read this file first — any agent or developer modifying this codebase MUST read project-config.json before making changes to understand the full context"
+    ]
+  },
+
+  "features": [
+    { "id": "F-01", "name": "Camera and microphone access", "status": "planned", "phase": 1, "priority": "critical" },
+    { "id": "F-02", "name": "Screen recording", "status": "planned", "phase": 1, "priority": "critical" },
+    { "id": "F-03", "name": "Block AI requests and browsers", "status": "planned", "phase": 1, "priority": "critical" },
+    { "id": "F-04", "name": "Block unauthorized programs", "status": "planned", "phase": 1, "priority": "critical" },
+    { "id": "F-05", "name": "Anti-hacking protections", "status": "planned", "phase": 1, "priority": "critical" },
+    { "id": "F-06", "name": "Clipboard blocking", "status": "planned", "phase": 1, "priority": "high" },
+    { "id": "F-07", "name": "Virtual machine detection", "status": "planned", "phase": 1, "priority": "critical" },
+    { "id": "F-08", "name": "Remote desktop / screen-sharing detection", "status": "planned", "phase": 1, "priority": "critical" },
+    { "id": "F-09", "name": "Multi-monitor detection and blocking", "status": "planned", "phase": 2, "priority": "high" },
+    { "id": "F-10", "name": "Keyboard shortcut lockdown", "status": "planned", "phase": 1, "priority": "critical" },
+    { "id": "F-11", "name": "Admin proctor dashboard", "status": "planned", "phase": 3, "priority": "medium" },
+    { "id": "F-12", "name": "Student identity verification (face-match)", "status": "planned", "phase": 3, "priority": "medium" },
+    { "id": "F-13", "name": "Periodic presence checks", "status": "planned", "phase": 4, "priority": "medium" },
+    { "id": "F-14", "name": "Network traffic filtering", "status": "planned", "phase": 1, "priority": "critical" },
+    { "id": "F-15", "name": "Encrypted data at rest and in transit", "status": "planned", "phase": 1, "priority": "high" },
+    { "id": "F-16", "name": "Tamper detection and integrity checks", "status": "planned", "phase": 2, "priority": "high" },
+    { "id": "F-17", "name": "Audit / violation log", "status": "planned", "phase": 1, "priority": "high" },
+    { "id": "F-18", "name": "Graceful degradation", "status": "planned", "phase": 1, "priority": "medium" },
+    { "id": "F-19", "name": "Exam timer with auto-submit", "status": "planned", "phase": 1, "priority": "high" },
+    { "id": "F-20", "name": "Proctor-initiated force-quit", "status": "planned", "phase": 3, "priority": "medium" },
+    { "id": "F-21", "name": "Web traffic recording", "status": "planned", "phase": 1, "priority": "high" },
+    { "id": "F-22", "name": "Desk/room scan", "status": "planned", "phase": 1, "priority": "high" },
+    { "id": "F-23", "name": "Gaze detection", "status": "planned", "phase": 4, "priority": "medium" },
+    { "id": "F-24", "name": "Digital signature verification", "status": "planned", "phase": 1, "priority": "high" },
+    { "id": "F-25", "name": "Exam re-entry prevention", "status": "planned", "phase": 1, "priority": "high" },
+    { "id": "F-26", "name": "Live proctor chat", "status": "planned", "phase": 3, "priority": "low" },
+    { "id": "F-27", "name": "Voiceprint authentication", "status": "planned", "phase": 1, "priority": "high" }
+  ],
+
+  "architecture": {
+    "stack": {
+      "runtime": "Electron 33+",
+      "language": "JavaScript (ES2022+)",
+      "ui": "HTML/CSS/JS (vanilla, no framework)",
+      "native": "node-addon-api (C++ addons for keyboard hooks, CPUID)",
+      "database_local": "better-sqlite3",
+      "database_server": "PostgreSQL",
+      "encryption": "AES-256-GCM via Node.js crypto",
+      "media_format": "WebM (VP8/VP9 video + Opus audio)",
+      "speaker_recognition": "TensorFlow.js (ECAPA-TDNN or equivalent)"
+    },
+    "modules": {
+      "src/main/": "Electron shell — app entry point, window management, menu override",
+      "src/browser/": "Secure browser — locked Chromium, URL filtering, AI request blocking, DNS blocking, web traffic logging",
+      "src/lockdown/": "Lockdown engine — process monitor, network filter, input guard, environment scanner. Delegates all OS calls to src/platform/",
+      "src/platform/": "Platform abstraction layer — unified API with win32/ and darwin/ implementations. ALL OS-specific code lives here.",
+      "src/platform/win32/": "Windows implementations — processes (wmic/tasklist), firewall (New-NetFirewallRule), keyboard (SetWindowsHookEx), clipboard, display, VM detection",
+      "src/platform/darwin/": "macOS implementations — processes (ps/pkill), firewall (pfctl), keyboard (CGEventTap), clipboard, display, VM detection, TCC permissions",
+      "src/media/": "Media capture — camera, microphone, screen recording, room scan. Uses getUserMedia and desktopCapturer.",
+      "src/renderer/": "Exam UI — HTML/CSS/JS exam interface, timer, digital signature, re-entry guard. Runs in isolated renderer process.",
+      "src/proctoring/": "Proctoring intelligence — voice calibration, voiceprint verification, gaze detection, presence monitoring, behavior analysis",
+      "src/security/": "Security layer — AES-256 encryption, binary integrity checks, audit logging, anti-tamper detection",
+      "src/questionBank/": "Question bank — SQLite storage, CSV/JSON import, export. Course designers import quizzes from LMS systems.",
+      "config/": "Configuration files — blocklists (processes, domains, shortcuts) and whitelists (allowed domains)",
+      "scripts/": "OS-level scripts — PowerShell (Windows) and shell (macOS) scripts for firewall setup and permissions"
+    },
+    "dependency_rules": [
+      "src/renderer/ → CANNOT import from src/main/, src/lockdown/, src/platform/, or any Node.js module directly",
+      "src/renderer/ → communicates with main process ONLY through preload.js contextBridge",
+      "src/lockdown/ → MUST use src/platform/ for all OS-specific operations",
+      "src/media/ → MUST use src/platform/ for permission checks on macOS",
+      "src/security/ → can be imported by any module",
+      "src/browser/ → runs in main process; controls webContents of the secure browser window"
+    ]
+  },
+
+  "blocklists": {
+    "_note": "Detailed lists are in config/blocklist.json. Summary below.",
+    "ai_domains": [
+      "gemini.google.com", "bard.google.com", "aistudio.google.com",
+      "chatgpt.com", "chat.openai.com", "api.openai.com",
+      "claude.ai", "api.anthropic.com",
+      "copilot.microsoft.com", "bing.com/chat",
+      "perplexity.ai",
+      "you.com", "phind.com", "poe.com",
+      "huggingface.co", "replicate.com",
+      "character.ai", "pi.ai", "mistral.ai"
+    ],
+    "browser_processes": {
+      "win32": ["chrome.exe", "msedge.exe", "firefox.exe", "brave.exe", "opera.exe", "vivaldi.exe", "iexplore.exe", "safari.exe"],
+      "darwin": ["Google Chrome", "Microsoft Edge", "Firefox", "Brave Browser", "Opera", "Vivaldi", "Safari"]
+    },
+    "remote_desktop_processes": {
+      "win32": ["TeamViewer.exe", "AnyDesk.exe", "mstsc.exe", "chrome_remote_desktop.exe", "ScreenConnect.exe", "uvnc.exe", "tvnserver.exe"],
+      "darwin": ["TeamViewer", "AnyDesk", "Chrome Remote Desktop Host", "ScreenConnect", "RealVNC"]
+    },
+    "chat_processes": {
+      "win32": ["Discord.exe", "Slack.exe", "Teams.exe", "Telegram.exe", "WhatsApp.exe", "Signal.exe", "Zoom.exe", "Skype.exe"],
+      "darwin": ["Discord", "Slack", "Microsoft Teams", "Telegram", "WhatsApp", "Signal", "zoom.us", "Skype"]
+    },
+    "vm_indicators": {
+      "network_adapter_names": [
+        "VirtualBox Host-Only Ethernet Adapter",
+        "VMware VMnet",
+        "VMnet1", "VMnet8",
+        "Hyper-V Virtual Ethernet Adapter",
+        "Parallels Host-Only",
+        "Parallels Shared",
+        "TAP-Windows Adapter",
+        "vnic"
+      ],
+      "mac_oui_prefixes": [
+        "08:00:27",
+        "00:0C:29", "00:50:56",
+        "00:15:5D",
+        "00:1C:42"
+      ],
+      "bios_strings": ["VBOX", "VMware", "QEMU", "Xen", "Virtual Machine", "Parallels"],
+      "service_names_win32": ["VBoxService", "vmtoolsd", "vmwaretray", "Hyper-V"],
+      "process_names_win32": ["VBoxTray.exe", "vmtoolsd.exe", "vmwaretray.exe", "prl_tools.exe"],
+      "process_names_darwin": ["VBoxClient", "VBoxService", "vmware-tools-daemon", "prl_tools", "open-vm-tools"],
+      "registry_paths_win32": ["HKLM\\SYSTEM\\CurrentControlSet\\Enum\\PCI"],
+      "disk_strings": ["VBOX HARDDISK", "VMware Virtual", "QEMU HARDDISK"],
+      "gpu_strings": ["VirtualBox Graphics Adapter", "VMware SVGA", "Microsoft Hyper-V Video", "Parallels Display Adapter"],
+      "gateway_patterns": ["10.0.2.2", "10.0.2.3"],
+      "mac_sysctl_keys": ["kern.hv_vmm_present", "hw.model"],
+      "mac_iokit_strings": ["VirtualBox", "VMware", "Parallels", "QEMU", "APPLE_VIRTUALIZATION"],
+      "mac_kext_strings": ["com.vmware.kext", "org.virtualbox.kext"],
+      "mac_launch_daemons": ["com.vmware.launchd.tools", "com.parallels.vm.prl_nettool"]
+    }
+  },
+
+  "security_policies": {
+    "encryption_algorithm": "AES-256-GCM",
+    "key_derivation": "PBKDF2 with SHA-512, 100000 iterations",
+    "transport": "TLS 1.3 minimum",
+    "recording_format": "WebM encrypted chunks",
+    "session_token": "JWT with 2-hour expiry, single-use",
+    "admin_exit": "Complex password (minimum 12 characters, mixed case, numbers, symbols) entered via hidden admin panel",
+    "admin_panel_trigger": "Ctrl+Shift+Alt+F12 (Windows) / Cmd+Shift+Option+F12 (macOS)",
+    "audit_log_format": "JSON Lines (.jsonl), each entry timestamped with ISO-8601",
+    "voiceprint_storage": "Encrypted locally per-session, deleted after upload",
+    "binary_integrity": "SHA-256 hash of app binary verified on startup against server-signed manifest"
+  },
+
+  "pre_exam_sequence": [
+    "1. Student launches app",
+    "2. Environment scan runs (VM detection, RDP detection, process scan, multi-monitor check)",
+    "3. If environment is clean, show login screen",
+    "4. Student authenticates (username/password)",
+    "5. Camera + microphone + screen recording permissions requested",
+    "6. Desk/room scan — student shows surroundings via webcam",
+    "7. Voice calibration — student reads 3-5 randomized phrases aloud",
+    "8. Digital signature — student signs to confirm identity and accept integrity policy",
+    "9. Kiosk lockdown activates (full-screen, shortcuts blocked, processes killed, firewall rules set)",
+    "10. Exam begins — timer starts, all media recording active"
+  ]
+}
