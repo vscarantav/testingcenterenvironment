@@ -18,6 +18,7 @@ const PLATFORM = process.platform; // 'win32' | 'darwin'
 // Lazy-load platform modules to avoid loading unused platform code
 let _processes, _firewall, _keyboard, _clipboard, _display, _vmDetect, _permissions;
 
+
 function getPlatformModule(moduleName) {
   const platformDir = PLATFORM === 'win32' ? 'win32' : 'darwin';
   const modulePath = path.join(__dirname, platformDir, moduleName);
@@ -46,6 +47,12 @@ function getFirewall() {
 function getKeyboard() {
   if (!_keyboard) _keyboard = getPlatformModule('keyboard');
   return _keyboard;
+}
+
+/** Display management — detect/watch multi-monitor */
+function getDisplay() {
+  if (!_display) _display = getPlatformModule('display');
+  return _display;
 }
 
 /** Clipboard management — clear, monitor */
